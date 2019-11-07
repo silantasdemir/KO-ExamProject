@@ -1,0 +1,83 @@
+﻿@model ExamDTO
+@{
+    ViewData["Title"] = "ExamCreate";
+}
+@{
+    List<SelectListItem> options = new List<SelectListItem>();
+    var data = new[]{
+                 new SelectListItem{ Value="A",Text="A"},
+                 new SelectListItem{ Value="B",Text="B"},
+                 new SelectListItem{ Value="C",Text="C"},
+                 new SelectListItem{ Value="D",Text="D"},
+             };
+    options = data.ToList();
+}
+
+<div class="container">
+    <div class="row" style="margin-left:200px;">
+        <form asp-action="ExamCreate" asp-controller="Exam" method="post">
+            <div>
+                @Html.DropDownListFor(a => a.Description, (IEnumerable<SelectListItem>)ViewBag.Post, new { @id = "Header", @class = "form-control" })
+            </div>
+            <div id="Desciption"></div>
+            <table style="width:500px;">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <input asp-for="Questions[i].QuestionText" style="width:100%" placeholder="Soru @(i+1) : " />
+                        </td>
+                    </tr>
+
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (j % 2 == 0)
+                        {
+                            @Html.Raw("<tr>")
+                        }
+
+                        <td>
+                            <input asp-for="Options[i].OptionText" style="width:100%" placeholder="@options[j].Text)" />
+                        </td>
+
+                        if (j % 2 == 1)
+                        {
+                            @Html.Raw("</tr>")
+                        }
+
+                    }
+
+                    <tr>
+                        <td colspan="2">
+                            @Html.DropDownListFor(a => a.Answers[i], (IEnumerable<SelectListItem>)options, new { @class = "form-control", style = "margin-left:120px; width:50%; margin-top:5px;margin-bottom:5px;" })
+                        </td>
+                    </tr>
+
+                }
+            </table>
+
+            <input class="btn btn-success" type="submit" value="Sinav Olustur" style="margin-top:20px; width:100%;" />
+
+        </form>
+    </div>
+</div>
+
+@section Script
+    {
+    <script>
+        $(function (dropDown) {
+            $('#Header').change(function () {
+                var value = $('#Header').val();
+                $.ajax({
+                    url: '@Url.Action("DescriptionPartial", "Exam")',
+                    dataType: 'HTML',
+                    type: 'GET',
+                    data: { description: value },
+                    success: function (data) {
+                        $('#Desciption').html(data);
+                        }
+                    });
+            });
+        });
+    </script>
+}

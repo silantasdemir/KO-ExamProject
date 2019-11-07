@@ -1,0 +1,27 @@
+﻿@model List<MemberExamsDTO>
+@{
+    ViewData["Title"] = "MemberExamList";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Header</th>
+            <th>Description</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (MemberExamsDTO item in Model)
+        {
+            <tr>
+                <td>@item.Header</td>
+                <td>@item.Description</td>
+                <td>@item.Score</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
