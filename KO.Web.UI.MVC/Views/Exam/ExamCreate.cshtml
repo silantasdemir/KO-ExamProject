@@ -68,12 +68,11 @@
 @section Script
     {
     <script>
-        $(function (dropDown) {
+        $(function () {
             $('#Header').change(function () {
                 var value = $('#Header').val();
                 $.ajax({
                     url: '@Url.Action("DescriptionPartial", "Exam")',
-                    dataType: 'HTML',
                     type: 'GET',
                     data: { description: value },
                     success: function (data) {

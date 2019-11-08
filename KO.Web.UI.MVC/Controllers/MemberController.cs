@@ -57,9 +57,17 @@ namespace KO.Web.UI.MVC.Controllers
 
             return View(examDTO);
         }
-        public IActionResult ExamComplete()
+
+        public void ExamComplete(int score, int examID)
         {
-            return View();
+            Member member = HttpContext.Session.GetObject<Member>("Member");
+
+            MemberExam memberExam = new MemberExam();
+            memberExam.MemberID = member.ID;
+            memberExam.Score = score;
+            memberExam.ExamID = examID;
+            memberExamService.Insert(memberExam);
         }
+
     }
 }

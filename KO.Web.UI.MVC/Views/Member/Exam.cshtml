@@ -14,7 +14,8 @@
     options = data.ToList();
 }
 
-@{int k = 0; }
+@{int k = 0;
+    int id = 16; }
 
 <div class="container">
     <div style="text-align:center;"><h4>@Model.Header</h4></div>
@@ -32,10 +33,12 @@
                                 <div class="col-xs-12">
                                     <div class="input-group">
                                         <div class="input-group-text">
-                                            <input type="radio" id="@k" value="@Model.Options[k].OptionText" name="@i">
+                                            <input type="radio" id="@k" value="@Model.Options[k].IsCorrect.ToString()" name="@i">
                                         </div>
-                                        <label for="@k" class="form-control test-option ">@options[j].Text) @Model.Options[k].OptionText</label>
-                                        @{ k++;}
+                                        <div for="@k" id="@id" class="form-control test-option ">
+                                            @options[j].Text) @Model.Options[k].OptionText
+                                        </div>
+                                        @{ k++; id++;}
                                     </div>
                                     <br>
                                 </div>
@@ -48,21 +51,35 @@
         }
 
     </div>
+
+    <button class="btn btn-success" style="margin-top:30px;margin-left:450px;" onclick="Tamamla()">SINAVI TAMAMLA</button>
 </div>
 
-<button class="btn btn-success" onclick="tamamla()" style="margin-top:25px;margin-left:500px;">SINAVI TAMAMLA</button>
-
 <script>
-        $(function tamamla() {
-            var options = document.getElementsByName(i.toString());
-                $.ajax({
-                    url: '@Url.Action("ExamComplete", "Member")',
-                    dataType: 'HTML',
-                    type: 'GET',
-                    data: { options: options },
-                    success: function (data) {
-                        $('#test').html(data);
-                        }
-                    });
-        });
+    function Tamamla() {
+
+        var id = 16;
+        var score = 0;
+        for (var i = 0; i < 16; i++) {
+            var tempRadio = document.getElementById(i);
+            var tempLabel = document.getElementById(id);
+
+            if (tempRadio.checked) {
+                if (tempRadio.value=="True") {
+                    tempLabel.style.backgroundColor = "green";
+                    score++;
+                }
+                else {
+                    tempLabel.style.backgroundColor = "red";
+                }
+            }
+            else {
+                tempLabel.style.backgroundColor = "white";
+            }
+
+            id++;
+        }
+
+        alert("Sınav Bitti Score : " + score);
+    }
 </script>
