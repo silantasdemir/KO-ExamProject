@@ -26,6 +26,14 @@
                         <input type="submit" class="btn btn-success" value="GİRİŞ YAP" style="float:right" />
                     </div>
                 </form>
+
+            </div>
+            <div class="panel-footer">
+                <br />
+                @if (ViewBag.Error != null)
+                {
+                    <span style="background-color:aliceblue">@ViewBag.Error</span>
+                }
             </div>
         </div>
     </div>

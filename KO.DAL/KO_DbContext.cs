@@ -22,7 +22,6 @@ namespace KO.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Member>().HasData(new Member { ID = 1, Username = "silan", Password = "123" });
         }
 
         public virtual DbSet<Member> Members { get; set; }

@@ -13,7 +13,7 @@
             <div class="panel-body" style="padding-top:30px;">
                 <div class="alert alert-danger col-sm-12" style="display:none" id="login-alert"></div>
 
-                <form asp-controller="Member" asp-action="Register" method="post" class="form-horizontal" role="form">
+                <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
                     <div class="input-group" style="margin-bottom:25px;">
                         <input asp-for="Username" class="form-control" placeholder="Kullanıcı Adı" />
                         <span asp-validation-for="Username"></span>
@@ -26,6 +26,13 @@
                         <input type="submit" class="btn btn-success" value="Uye Ol" style="float:right" />
                     </div>
                 </form>
+            </div>
+            <div class="panel-footer">
+                <br />
+                @if (ViewBag.Error != null)
+                {
+                    <span style="background-color:aliceblue">@ViewBag.Error</span>
+                }
             </div>
         </div>
     </div>

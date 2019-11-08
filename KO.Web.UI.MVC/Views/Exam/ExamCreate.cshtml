@@ -21,6 +21,8 @@
             </div>
             <div id="Desciption"></div>
             <table style="width:500px;">
+
+                @{int k = 0; }
                 @for (int i = 0; i < 4; i++)
                 {
                     <tr>
@@ -37,7 +39,8 @@
                         }
 
                         <td>
-                            <input asp-for="Options[i].OptionText" style="width:100%" placeholder="@options[j].Text)" />
+                            <input asp-for="Options[k].OptionText" style="width:100%" placeholder="@options[j].Text)" />
+                            @{k++; }
                         </td>
 
                         if (j % 2 == 1)
@@ -56,7 +59,7 @@
                 }
             </table>
 
-            <input class="btn btn-success" type="submit" value="Sinav Olustur" style="margin-top:20px; width:100%;" />
+            <input class="btn btn-success" type="submit" value="Sınav Olustur" style="margin-top:20px; width:100%;" />
 
         </form>
     </div>

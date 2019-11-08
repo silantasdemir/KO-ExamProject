@@ -7,6 +7,6 @@ namespace KO.BLL.Abstract
 {
     public interface IMemberService : IBaseService<Member>
     {
-        string UserLogin(Member member);
+        Member UserLogin(string username, string pass);
     }
 }

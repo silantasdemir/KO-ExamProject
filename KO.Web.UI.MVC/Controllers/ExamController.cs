@@ -26,7 +26,6 @@ namespace KO.Web.UI.MVC.Controllers
         }
         public IActionResult DescriptionPartial(string description)
         {
-
             return PartialView("DescriptionPartial", description);
         }
         public IActionResult ExamCreate()
@@ -55,6 +54,7 @@ namespace KO.Web.UI.MVC.Controllers
             newExam.Description = exam.Description;
             examService.Insert(newExam);
 
+            int k = 0;
             for (int i = 0; i < 4; i++)
             {
                 Question newQuestion = new Question();
@@ -66,9 +66,10 @@ namespace KO.Web.UI.MVC.Controllers
                 {
                     Option newOption = new Option();
                     newOption.QuestionID = newQuestion.ID;
-                    newOption.OptionText = exam.Options[i].OptionText;
+                    newOption.OptionText = exam.Options[k].OptionText;
                     newOption.IsCorrect = (j + 65 == exam.Answers[i] ? true : false);
                     optionService.Insert(newOption);
+                    k++;
                 }
             }
 
@@ -97,11 +98,6 @@ namespace KO.Web.UI.MVC.Controllers
             examService.Delete(exam);
 
             return RedirectToAction("ExamList");
-        }
-
-        public IActionResult ExamComplete(int id)
-        {
-            return View();
         }
     }
 }

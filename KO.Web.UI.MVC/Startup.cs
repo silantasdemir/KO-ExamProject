@@ -7,6 +7,7 @@ using KO.BLL.Concreate;
 using KO.DAL;
 using KO.DAL.Abstract;
 using KO.DAL.Concreate;
+using KO.Web.UI.MVC.CustomFilters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,10 @@ namespace KO.Web.UI.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSession();
+            services.AddScoped<MemberLoginFilter>();
+
             services.AddScoped<IExamService, ExamService>();
             services.AddScoped<IExamDAL, ExamDAL>();
             services.AddScoped<IMemberService, MemberService>();
@@ -41,7 +46,6 @@ namespace KO.Web.UI.MVC
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuestionDAL, QuestionDAL>();
 
-            services.AddSession();
             services.AddDistributedMemoryCache();
 
         }

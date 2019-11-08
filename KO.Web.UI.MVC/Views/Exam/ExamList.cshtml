@@ -23,7 +23,7 @@
                 <td>@Model[i].Header</td>
                 <td>@Model[i].CreatedDate.ToString("yyyy'-'MM'-'dd")</td>
                 <td>@Html.ActionLink("Sil", "ExamDelete", "Exam", new { id = Model[i].ID })</td>
-                <td>@Html.ActionLink("Sınav Ol", "ExamComplete", "Exam", new { id = Model[i].ID })</td>
+                <td>@Html.ActionLink("Sınav Ol", "Exam", "Member", new { id = Model[i].ID })</td>
             </tr>
         }
     </tbody>

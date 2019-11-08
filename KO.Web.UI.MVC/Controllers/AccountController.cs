@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KO.BLL.Abstract;
 using KO.Entities;
 using KO.Web.UI.MVC.ExtensionMethods;
+using KO.Web.UI.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KO.Web.UI.MVC.Controllers
@@ -18,6 +19,7 @@ namespace KO.Web.UI.MVC.Controllers
         }
         public IActionResult Login()
         {
+            HttpContext.Session.Remove("Member");
             return View();
         }
 
@@ -27,14 +29,14 @@ namespace KO.Web.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                string LoginMessage = memberService.UserLogin(member);
-                if (String.IsNullOrEmpty(LoginMessage))
+                Member temp = memberService.UserLogin(member.Username, member.Password);
+                if (temp != null)
                 {
                     HttpContext.Session.SetObject("Member", member);
-                    return RedirectToAction("Index", "Member");
+                    return RedirectToAction("MemberExamList", "Member");
                 }
                 else
-                    ModelState.AddModelError("", LoginMessage);
+                    ViewBag.Error = "Kullanici Bulunamadi";
             }
             return View(member);
         }
@@ -50,7 +52,11 @@ namespace KO.Web.UI.MVC.Controllers
             if (ModelState.IsValid)
             {
                 memberService.Insert(member);
+                return RedirectToAction("Login", "Account");
             }
+            else
+                ViewBag.Error = "Kayit Basarisiz";
+
             return View(member);
         }
     }

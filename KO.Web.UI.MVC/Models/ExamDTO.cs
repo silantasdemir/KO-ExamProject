@@ -14,5 +14,12 @@ namespace KO.Web.UI.MVC.Models
         public char[] Answers { get; set; }
         public Option[] Options { get; set; }
 
+        public ExamDTO()
+        {
+            Questions = new Question[4];
+            Answers = new char[4];
+            Options = new Option[16];
+        }
+
     }
 }

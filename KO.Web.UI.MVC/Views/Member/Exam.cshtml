@@ -1,0 +1,68 @@
+﻿@model ExamDTO
+@{
+    ViewData["Title"] = "Exam";
+}
+
+@{
+    List<SelectListItem> options = new List<SelectListItem>();
+    var data = new[]{
+                 new SelectListItem{ Value="A",Text="A"},
+                 new SelectListItem{ Value="B",Text="B"},
+                 new SelectListItem{ Value="C",Text="C"},
+                 new SelectListItem{ Value="D",Text="D"},
+             };
+    options = data.ToList();
+}
+
+@{int k = 0; }
+
+<div class="container">
+    <div style="text-align:center;"><h4>@Model.Header</h4></div>
+    <div style="text-align:center;"><h6>@Model.Description</h6></div>
+    <div class="row" style="margin-top:30px;">
+        @for (int i = 0; i < 4; i++)
+        {
+            <div class="card col-md-6">
+                <p>@(i + 1)) @Model.Questions[i].QuestionText</p>
+                <div class="card-body col-md-12">
+                    @for (int j = 0; j < 4; j++)
+                    {
+                        <div class="row mb-2 col-md-12">
+                            <div class="col-md-12">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <input type="radio" id="@k" value="@Model.Options[k].OptionText" name="@i">
+                                        </div>
+                                        <label for="@k" class="form-control test-option ">@options[j].Text) @Model.Options[k].OptionText</label>
+                                        @{ k++;}
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <br />
+        }
+
+    </div>
+</div>
+
+<button class="btn btn-success" onclick="tamamla()" style="margin-top:25px;margin-left:500px;">SINAVI TAMAMLA</button>
+
+<script>
+        $(function tamamla() {
+            var options = document.getElementsByName(i.toString());
+                $.ajax({
+                    url: '@Url.Action("ExamComplete", "Member")',
+                    dataType: 'HTML',
+                    type: 'GET',
+                    data: { options: options },
+                    success: function (data) {
+                        $('#test').html(data);
+                        }
+                    });
+        });
+</script>

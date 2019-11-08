@@ -471,3 +471,4 @@ C:\Users\user\Desktop\KO-ExamProject\KO.Web.UI.MVC\obj\Debug\netcoreapp3.0\KO.We
 C:\Users\user\Desktop\KO-ExamProject\KO.Web.UI.MVC\obj\Debug\netcoreapp3.0\KO.Web.UI.MVC.csproj.CopyComplete
 C:\Users\user\Desktop\KO-ExamProject\KO.Web.UI.MVC\obj\Debug\netcoreapp3.0\KO.Web.UI.MVC.dll
 C:\Users\user\Desktop\KO-ExamProject\KO.Web.UI.MVC\obj\Debug\netcoreapp3.0\KO.Web.UI.MVC.pdb
+C:\Users\user\Desktop\KO-ExamProject\KO.Web.UI.MVC\obj\Debug\netcoreapp3.0\Razor\Views\Member\Exam.cshtml.g.cs

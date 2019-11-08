@@ -34,17 +34,9 @@ namespace KO.BLL.Concreate
         {
             memberDAL.Update(entity);
         }
-        public string UserLogin(Member member)
+        public Member UserLogin(string username, string pass)
         {
-            if (memberDAL.Get(a => a.ID == member.ID).Username == member.Username)
-            {
-                if (memberDAL.Get(a => a.ID == member.ID).Password == member.Password)
-                    return null;
-                else
-                    return "Sifre Yanlis";
-            }
-            else
-                return "Kullanici Bulunamadi";
+            return memberDAL.Get(a => a.Username == username && a.Password == pass);
         }
     }
 }
